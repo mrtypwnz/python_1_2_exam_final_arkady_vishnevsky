@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Втентакли{% endblock %}
+{% block title %}Bookingem{% endblock %}
 {% block content %}
-   {% for post in post_list %}
+   {% for book in book_list %}
     <div class="jumbotron">
       <h1 class="display-4"><a href="{% url 'webapp:book_detail' book.pk %}">{{ book.title }}</a></h1>
       <hr class="my-4">
-      <p>{{ post.article_date }}</p>
-{#      <a class="btn btn-primary btn-lg" href="{% url 'webapp:user_office' post.author.userinfopk %}" role="button">{{ post.author }}</a>#}
-      <a class="btn btn-primary btn-lg" href="{% url 'webapp:book_update' book.pk %}" role="button">редактировать</a>
+      <p>{{ book.description }}</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'webapp:author_detail' book.author.id  %}" role="button">{{ book.author.name }} {{ book.author.surname }}</a>
     </div>
     {% endfor %}
 {% endblock %}

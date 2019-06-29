@@ -2,22 +2,37 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class SoftDeleteManager(models.Manager):
+    def active(self):
+        return self.filter(is_deleted=False)
+
+    def deleted(self):
+        return self.filter(is_deleted=True)
+
 class Author(models.Model):
     name = models.CharField(max_length=55, verbose_name="Имя")
     surname = models.CharField(max_length=55, verbose_name="Фамилия")
-    birthdate = models.DateField(blank=True, verbose_name="Дата рождения")
-    dateofdeath = models.DateField(blank=True, verbose_name="Дата смерти")
-    biography = models.TextField(blank=True, verbose_name="Биография")
-    photo = models.ImageField(blank=True, verbose_name="Фотография")
-    status = models.BooleanField(default=True)
+    birthdate = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
+    dateofdeath = models.DateField(null=True, blank=True, verbose_name="Дата смерти")
+    biography = models.TextField(null=True, blank=True, verbose_name="Биография")
+    photo = models.ImageField(null=True, blank=True, verbose_name="Фотография")
+    is_deleted = models.BooleanField(default=False)
+
+    objects = SoftDeleteManager()
+
+    def __str__(self):
+        return self.surname
 
 class Book(models.Model):
     title = models.CharField(max_length=55, verbose_name='Название')
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     publicationdate = models.DateField()
-    file = models.FileField()
-    cover = models.ImageField(blank=True, verbose_name="Обложка")
-    description = models.TextField(max_length=2500, blank=True, verbose_name="Описание")
+    file = models.FileField(null=True, blank=True)
+    cover = models.ImageField(null=True, blank=True, verbose_name="Обложка")
+    description = models.TextField(max_length=2500, null=True, blank=True, verbose_name="Описание")
+
+    def __str__(self):
+        return self.title
 
 class Bookmark(models.Model):
     bookmark_id = models.AutoField(primary_key=True)

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container">
+        <form action="{% url 'webapp:author_update' author.pk %}" method="post" class="mt-4">
+            {% csrf_token %}
+                <div class="form-group row" style="margin-top: 150px">
+                    <label for="id_name" class="col-sm-2 col-form-label col-form-label-sm">ФИО</label>
+                    <div class="col-sm-6">
+                        {{ form.name }}
+
+                        {{ form.surname }}
+                        <small class="form-text text-muted">Обязательное поле</small>
+                        {% for i in form.name.errors %}
+                            <p class="font-weight-light text-danger d-block small text-center pb-0 mb-0">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="id_first_name" class="col-sm-2 col-form-label col-form-label-sm">Дата рождения</label>
+                    <div class="col-sm-6">
+                        {{ form.birthdate }}
+                        {% for i in form.birthdate.errors %}
+                            <p class="font-weight-light text-danger d-block small text-center pb-0 mb-0">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="id_first_name" class="col-sm-2 col-form-label col-form-label-sm">Дата смерти</label>
+                    <div class="col-sm-6">
+                        {{ form.dateofdeath }}
+                        {% for i in form.dateofdeath.errors %}
+                            <p class="font-weight-light text-danger d-block small text-center pb-0 mb-0">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="id_biography" class="col-sm-2 col-form-label col-form-label-sm">Биограция</label>
+                    <div class="col-sm-6">
+                        {{ form.biography }}
+                        {% for i in form.biography.errors %}
+                            <p class="font-weight-light text-danger d-block small text-center pb-0 mb-0">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="id_photography" class="col-sm-2 col-form-label col-form-label-sm">Фото</label>
+                    <div class="col-sm-6">
+                        {{ form.photo }}
+                        {% for i in form.photo.errors %}
+                            <p class="font-weight-light text-danger d-block small text-center pb-0 mb-0">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            <button class="btn btn-sm btn-outline-info">Submit</button>
+        </form>
+    </div>
+{% endblock %}

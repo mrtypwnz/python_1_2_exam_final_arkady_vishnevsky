@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">{{ book.title }}</h1>
+            <img src="" alt="{{ book.photo }}">
+            <p class="lead">{{ book.description }}</p>
+            <a>Автор {{ book.author.name }} {{ book.author.surname }}</a>
+            {% if user.is_superuser %}
+                <button type="button" class="btn btn-outline-light"><a href="{% url 'webapp:book_update' book.pk %}">редактировать</a>
+                </button>
+                <button class="btn btn-outline-light"><a href="{% url 'webapp:book_delete' book.pk %}"
+                                                         data-toggle="modal"
+                                                         data-target="#exampleModal{{ book.pk }}"><span
+                        class="font-weight-bold">Удалить</span></a></button>
+                <div class="modal fade" id="exampleModal{{ book.pk }}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Вы уверены?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Вы уверены что хотите удалить книгу?
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'webapp:book_delete' book.pk %}" class="btn btn-secondary">Да</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Авторы{% endblock %}
+{% block content %}
+    <div class="list-group">
+        {% for author in author_list %}
+            <div class="jumbotron">
+                <h1 class="display-4">{{ author.name }} {{ author.surname }}</h1>
+                <p>Дата рождения: {{ author.birthdate }}</p>
+                <p>Дата смерти: {{ author.dateofdeath }}</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-lg" href="{% url 'webapp:author_detail' author.pk %}" role="button">
+                    {{ author.name }} {{ author.surname }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
