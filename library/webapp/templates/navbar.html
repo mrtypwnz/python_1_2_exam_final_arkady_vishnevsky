@@ -1,21 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-0 border-bottom pb-0">
+<nav class="navbar navbar-expand-lg navbar-dark mb-0 border-bottom pb-0">
     <div class="container">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-dark">
             <a class="navbar-brand" href="{% url 'webapp:book_list' %}">
-                <span class="h3 mb-0 pb-0 font-weight-light">Bookingem</span>
+                <span class="h3 mb-0 pb-0 font-weight-bold">Bookingem</span>
             </a>
             <a class="navbar-brand" href="{% url 'webapp:author_list' %}">
-                <span class="h6 mb-0 pb-0 font-weight-light">Писатели</span>
+                <span class="h6 mb-0 pb-0 font-weight-bold">Писатели</span>
             </a>
-            {% if user.is_authenticated %}
-                <li class="nav-item navbar-text">Привет, <a
-                        href="{% url 'webapp:user_info' user.pk %}">{{ user.username }}</a>!
-                </li>
-                <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link">Выход</a></li>
-            {% else %}
-                <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link">Вход</a></li>
-            {% endif %}
-        </nav>
+                {% if user.is_authenticated %}
+                    <li class="nav-item navbar-text">Привет, <a
+                            href="{% url 'webapp:user_info' user.pk %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="nav-link text-light">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'accounts:login' %}" class="nav-link text-light">Вход</a></li>
+                {% endif %}
+            </div>
     </div>
 </nav>
 

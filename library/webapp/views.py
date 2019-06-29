@@ -29,6 +29,9 @@ class BookUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     form_class = BookForm
     permission_required = 'superuser'
 
+    def get_success_url(self):
+        return reverse('webapp:book_list')
+
 class BookDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Book
     permission_required = 'superuser'
@@ -78,6 +81,9 @@ class AuthorUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'author_update.html'
     form_class = AuthorCreateForm
     permission_required = 'superuser'
+
+    def get_success_url(self):
+        return reverse('webapp:author_list')
 
 
 class AuthorCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
