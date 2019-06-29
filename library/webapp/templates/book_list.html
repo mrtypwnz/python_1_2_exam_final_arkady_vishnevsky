@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Втентакли{% endblock %}
+{% block content %}
+   {% for post in post_list %}
+    <div class="jumbotron">
+      <h1 class="display-4"><a href="{% url 'webapp:book_detail' book.pk %}">{{ book.title }}</a></h1>
+      <hr class="my-4">
+      <p>{{ post.article_date }}</p>
+{#      <a class="btn btn-primary btn-lg" href="{% url 'webapp:user_office' post.author.userinfopk %}" role="button">{{ post.author }}</a>#}
+      <a class="btn btn-primary btn-lg" href="{% url 'webapp:book_update' book.pk %}" role="button">редактировать</a>
+    </div>
+    {% endfor %}
+{% endblock %}

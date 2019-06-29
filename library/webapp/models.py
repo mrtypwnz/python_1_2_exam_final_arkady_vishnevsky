@@ -12,7 +12,7 @@ class Author(models.Model):
     status = models.BooleanField(default=True)
 
 class Book(models.Model):
-    name = models.CharField(max_length=55, verbose_name='Название')
+    title = models.CharField(max_length=55, verbose_name='Название')
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     publicationdate = models.DateField()
     file = models.FileField()
